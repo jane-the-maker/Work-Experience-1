@@ -754,9 +754,14 @@ img {
   .nav-links {
     font-size: 20px;
   }
-
 }
 
+@media (max-width: 720px) {
+  
+  .site-header--home .nav-links {
+    flex-direction: column;
+}
+}
 @media (max-width: 768px) {
   h1 {
     font-size: 40px;
@@ -803,19 +808,17 @@ img {
     font-size: 34px;
   } 
 
-  .nav-links li:not(:last-child) {
-    display: none;
-  }
-
-  
   .btn {
-    font-size: 14px;
+    font-size: 12px;
+    padding: 4px 8px;
+
   }
 
   .site-header--home 
   .nav-links 
   .btn {
     margin-left: 0;
+    padding: 2px 8px;
   }
 
   .hero-media {
