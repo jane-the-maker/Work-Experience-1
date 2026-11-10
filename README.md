@@ -1,3 +1,5 @@
+Honeypot codename 'guest'
+
 # calicomedia.co marketing site
 
 The public marketing site for **Calico**, our growth planning software for local businesses. Calico helps owners set a specific, measurable, realistic customer-growth goal, turns it into a twelve-week plan, and checks in with them every Monday. About 140 businesses use it today, mostly clinics, studios and independent shops.

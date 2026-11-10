@@ -1,0 +1,77 @@
+const form = document.getElementById('contact-form');
+// represents the html element of the form itself, NOT the input
+
+const statusEl = document.getElementById('form-status');
+// represents the HTML element where we'll display status messages
+// (JavaScript is finding specific HTML elements so it can interact with them.)
+
+const formStartTime = Date.now();
+
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault(); 
+  // sets everything up to start once the submit button is clicked
+
+  const data = Object.fromEntries(new FormData(form));
+  // establishes that we're working on the text the user typed into the form fields
+
+  const button = form.querySelector('button[type="submit"]');
+  //this is the button that we're working with
+  // user cannot click submit again until after js is finished with its work
+  statusEl.textContent = '';
+  // clears the text inside the status message element, not the user's form inputs. This removes any previous success or error message
+  statusEl.className = 'form-status';
+  // changes the class of the form while js is working on it
+
+  const formLoadTime = Date.now() - formStartTime; 
+  // Assume formStartTime is set when the form loads
+  if (formLoadTime < 3000) {
+    console.log("Submission too quick! Submission dropped.");
+    return; // Stop the submission
+  }
+  
+  if (data.guest) {
+    // honeypot activated
+    return;
+  }
+  
+  button.disabled = true;
+
+  try {
+    const response = await fetch('/contact', {
+      // contact is the URL of the server endpoint receiving the data, not necessarily the page containing the form. fetch() sends an HTTP request to that endpoint
+      method: 'POST',
+      // lets the server know to expect data (post as in send, not before/after)
+      headers: { 'Content-Type': 'application/json' },
+      // sets the content as a js operation?
+      body: JSON.stringify(data),
+      // turns the user's input into a .json string
+    });
+
+    const result = await response.json();
+    // reads the response body and converts its JSON content into a JavaScript value we can work with. - turns json back into javascript
+    if (!result.ok) {
+      throw new Error(result.error || 'Something went wrong.');
+    }
+    // if something isn't right, create an error
+    // result.ok is a property of the JSON returned by your server, not the built-in response.ok property.
+
+    
+
+    form.reset();
+    statusEl.textContent = "Thanks, we'll be in touch within one business day.";
+    // gives a message to the user to let them know the form submit was successful
+    statusEl.classList.add('form-status--success');
+    // adds the class 'form-status--success' to the status element from before
+
+  } catch (error) {
+    statusEl.textContent = error.message || 'Something went wrong. Please email hello@calicomedia.co instead.';
+    statusEl.classList.add('form-status--error');
+    // if there was an error before, lets the user know about it and to email their request instead
+
+  } finally {
+    button.disabled = false;
+    // turn the button back on so its available for another form submission
+  }
+});
+
