@@ -2,11 +2,17 @@ const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 const formStartTime = Date.now();
 
+function showSuccess() {
+  form.reset();
+  statusEl.textContent = "Thanks, we'll be in touch within one business day.";
+  statusEl.classList.add('form-status--success');
+}
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault(); 
   
   const data = Object.fromEntries(new FormData(form));
+  data.formStartTime = formStartTime;
   const button = form.querySelector('button[type="submit"]');
   
   statusEl.textContent = '';
@@ -14,11 +20,13 @@ form.addEventListener('submit', async (event) => {
 
   const formLoadTime = Date.now() - formStartTime; 
   if (formLoadTime < 3000) {
+    showSuccess();
     console.log("Submission too quick! Submission dropped.");
     return; 
   }
   
   if (data.guest) {
+    showSuccess();
     return;
   }
   
@@ -35,8 +43,6 @@ form.addEventListener('submit', async (event) => {
     if (!result.ok) {
       throw new Error(result.error || 'Something went wrong.');
     }
-
-    
 
     form.reset();
     statusEl.textContent = "Thanks, we'll be in touch within one business day.";
