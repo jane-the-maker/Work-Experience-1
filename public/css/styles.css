@@ -2,24 +2,16 @@
 @font-face {
   font-family: 'Inter';
   font-weight: 400;  
-  src: url('public/Fonts/Inter/Inter_18pt-Regular copy.ttf') format('ttf'),    
+  font-display: swap;
+  src: url('../Fonts/Inter/Inter_18pt-Regular.woff2') format('truetype');    
 }
 @font-face {
   font-family: 'Inter';
   font-weight: 700;  
-  src: url('public/Fonts/Inter/Inter_24pt-Bold copy.ttf') format('ttf');  
+  font-display: swap;
+  src: url('../Fonts/Inter/Inter_24pt-Bold.woff2') format('truetype');  
 }
 
-@font-face {
-  font-family: 'Segoe UI';
-  font-weight: 400; 
-  src: url('public/Fonts/Segoe UI/Segoe-UI-Variable-Static-Text copy.ttf') format('ttf'),
-}
-@font-face {
-  font-family: 'Segoe UI';
-  font-weight: 700; 
-  src: url('public/Fonts/Segoe UI/Segoe-UI-Variable-Static-Text-Bold copy.ttf') format('ttf'); 
-}
 
 
 :root {
