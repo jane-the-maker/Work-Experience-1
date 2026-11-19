@@ -46,8 +46,11 @@
           <label for="message">How can we help?</label>
           <textarea id="message" name="message" required></textarea>
 
-          <label for="guest">Leave this field empty:</label>
-          <input type="text" id="guest" name="guest"  tabindex="-1" autocomplete="off"/>
+          <div class="guest-field" aria-hidden="true">
+            <label for="guest">Leave this field empty:</label>
+            <input type="text" id="guest" name="guest"  tabindex="-1" autocomplete="off"/>
+        </div>
+
 
           <button class="btn" type="submit">Send message</button>
           <p class="form-status" id="form-status" role="status"></p>

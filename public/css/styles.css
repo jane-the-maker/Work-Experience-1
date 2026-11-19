@@ -149,11 +149,12 @@ img {
   background: rgba(255, 255, 255, 0.1);
 }
 
-#guest {
+.guest-field {
   display: none;
   position: absolute; 
   left: -9999px;
 }
+
 
 /* Header */
 
